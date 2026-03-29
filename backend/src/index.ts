@@ -3,6 +3,8 @@ dotenv.config();
 
 import express from 'express';
 import cors from 'cors';
+import { runMigrations } from './db/migrate';
+
 
 import shopsRouter from './routes/shops';
 import ordersRouter from './routes/orders';
@@ -27,6 +29,16 @@ app.use('/api/coupons', couponsRouter);
 
 app.use((_req, res) => {
   res.status(404).json({ error: 'Route not found' });
+});
+
+app.listen(PORT, async () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+  try {
+    await runMigrations();
+    console.log('Migrations done');
+  } catch (err) {
+    console.error('Migration error:', err);
+  }
 });
 
 app.use((err: Error, _req: express.Request, res: express.Response, _next: express.NextFunction) => {

@@ -76,4 +76,6 @@ const migrate = async () => {
   }
 };
 
-migrate();
+export async function runMigrations() {
+  await migrate();
+}
