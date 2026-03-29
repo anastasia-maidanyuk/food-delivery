@@ -26,6 +26,16 @@ app.use('/api/shops', shopsRouter);
 app.use('/api/orders', ordersRouter);
 app.use('/api/coupons', couponsRouter);
 
+app.get('/run-seed', async (_req, res) => {
+  try {
+    const { runSeed } = await import('./db/seed');
+    await runSeed();
+    res.json({ message: 'Seed completed!' });
+  } catch (err) {
+    res.status(500).json({ error: String(err) });
+  }
+});
+
 app.use((_req, res) => {
   res.status(404).json({ error: 'Route not found' });
 });

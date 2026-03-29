@@ -72,10 +72,11 @@ await client.query(`
     await client.query('ROLLBACK');
     console.error('Seed failed:', err);
     throw err;
-  } finally {
+} finally {
     client.release();
-    await pool.end();
   }
 };
 
-seed();
+export async function runSeed() {
+  await seed();
+}
