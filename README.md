@@ -84,3 +84,6 @@ npm run dev
 API (Бекенд): Render Web Service
 
 Клієнт (Фронтенд): Vercel
+
+
+Посилання на деплой: https://food-delivery-6xwb.vercel.app/
